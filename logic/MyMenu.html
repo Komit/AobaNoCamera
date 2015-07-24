@@ -1,0 +1,62 @@
+<div id="ancMenu">
+    <h1>青葉のカメラ</h1>
+    <h2>通常撮影</h2>
+    <div class="leftMargin bottomMargin">
+        <div class="bottomMargin">
+            <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="standard" data-capture-mode="standard">全体</a>
+            <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="material" data-capture-mode="material" data-mask-mode="material">資材</a>
+            <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="item" data-capture-mode="item">装備(図鑑)</a>
+        </div>
+        <div class="bottomMargin">
+            <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="ship1" data-capture-mode="ship1">艦娘(編成)</a>
+            <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="ship2" data-capture-mode="ship2">艦娘(図鑑)</a>
+        </div>
+    </div>
+    <h2>提督名マスキング撮影</h2>
+    <div class="leftMargin bottomMargin">
+        <div class="bottomMargin">
+            <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="header" data-capture-mode="standard" data-mask-mode="header">ヘッダー</a>
+        </div>
+        <div class="bottomMargin">
+            <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="battleResult1" data-capture-mode="standard" data-mask-mode="battleResult1">戦果報告1</a>
+            <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="battleResult2" data-capture-mode="standard" data-mask-mode="battleResult2">戦果報告2</a>
+        </div>
+        <div class="bottomMargin">
+            <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="headquarters" data-capture-mode="standard" data-mask-mode="headquarters">司令部情報</a>
+            <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="ranking" data-capture-mode="standard" data-mask-mode="ranking">ランキング</a>
+        </div>
+    </div>
+    <h2>編成撮影</h2>
+    <ol>
+        <li>
+            <div class="bottomMargin">編成数・並び方を選択</div>
+            <div id="ancMenuSelectNum" class="bottomMargin">
+                <a href="#" data-event="click:eventSelect" data-type="num" data-num="1">1</a>
+                <a href="#" data-event="click:eventSelect" data-type="num" data-num="2">2</a>
+                <a href="#" data-event="click:eventSelect" data-type="num" data-num="3">3</a>
+                <a href="#" data-event="click:eventSelect" data-type="num" data-num="4">4</a>
+                <a href="#" data-event="click:eventSelect" data-type="num" data-num="5">5</a>
+                <a href="#" data-event="click:eventSelect" data-type="num" data-num="6">6</a>
+            </div>
+            <div id="ancMenuSelectColumn" class="bottomMargin">
+                <a href="#" data-event="click:eventSelect" data-type="column" data-num="2">縦2列</a>
+                <a href="#" data-event="click:eventSelect" data-type="column" data-num="3">縦3列</a>
+            </div>
+        </li>
+        <li>
+            <div>[編成]の[詳細]から撮影</div>
+            <div id="ancFormationCanvasArea" class="bottomMargin">
+                <canvas id="ancFormationCanvas"></canvas>
+                <a href="#" id="ancShotFormation1" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
+                <a href="#" id="ancShotFormation2" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
+                <a href="#" id="ancShotFormation3" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
+                <a href="#" id="ancShotFormation4" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
+                <a href="#" id="ancShotFormation5" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
+                <a href="#" id="ancShotFormation6" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
+            </div>
+        </li>
+        <li>
+            <a href="#" class="ancSaveButton" data-event="click:eventSave" data-target="ancFormationCanvas">保存</a>
+        </li>
+    </ol>
+</div>

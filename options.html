@@ -1,0 +1,90 @@
+<!doctype>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>青葉のカメラ</title>
+        <link rel="stylesheet" type="text/css" href="options.css">
+        <script src="lib/jquery-2.1.3.min.js"></script>
+        <script src="lib/Varlink.js"></script>
+        <script src="logic/MyKey.js"></script>
+        <script src="const.js"></script>
+        <script src="options.js"></script>
+    </head>
+    <body>
+        <form>
+            <h2>オプション設定</h2>
+            <div class="leftMargin bottomMargin">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><label><input type="radio" name="shutterSound" data-varlink="shutterSound" value="on">ON</label> <label><input type="radio" name="shutterSound" data-varlink="shutterSound" value="off">OFF</label></td>
+                            <td>&nbsp;&nbsp;</td>
+                            <td>撮影時にシャッター音を鳴らす。</td>
+                        </tr>
+                        <tr>
+                            <td><label><input type="radio" name="shutterFrame" data-varlink="shutterFrame" value="on">ON</label> <label><input type="radio" name="shutterFrame" data-varlink="shutterFrame" value="off">OFF</label></td>
+                            <td>&nbsp;&nbsp;</td>
+                            <td>マウスオーバー時に撮影フレームを表示させる。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2>保存ファイル名</h2>
+            <div class="leftMargin bottomMargin">
+                <input type="text" name="defaultFileName" data-varlink="defaultFileName">.png
+                <br><br>
+                ※以下の文字は置換されます。<br>
+                <table>
+                    <tbody>
+                        <tr><td>YYYY</td><td> → </td><td>現在時刻の西暦4桁</td><td>&nbsp;</td><td>hh</td><td> → </td><td>現在時刻の時</td></tr>
+                        <tr><td>YY</td><td> → </td><td>現在時刻の西暦2桁</td><td>&nbsp;</td><td>mm</td><td> → </td><td>現在時刻の分</td></tr>
+                        <tr><td>MM</td><td> → </td><td>現在時刻の月</td><td>&nbsp;</td><td>ss</td><td> → </td><td>現在時刻の秒</td></tr>
+                        <tr><td>DD</td><td> → </td><td colspan="5">現在時刻の日</td></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2>ホットキー (実験機能)</h2>
+            <div class="leftMargin bottomMargin">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>全体</td><td>：</td><td><div class="hotKey" data-hot-key="standard">&nbsp;</div></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>ヘッダー</td><td>：</td><td><div class="hotKey" data-hot-key="header">&nbsp;</div></td>
+                        </tr>
+                        <tr>
+                            <td>資材</td><td>：</td><td><div class="hotKey" data-hot-key="material">&nbsp;</div></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>戦果報告1</td><td>：</td><td><div class="hotKey" data-hot-key="battleResult1">&nbsp;</div></td>
+                        </tr>
+                        <tr>
+                            <td>装備(図鑑)</td><td>：</td><td><div class="hotKey" data-hot-key="item">&nbsp;</div></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>戦果報告2</td><td>：</td><td><div class="hotKey" data-hot-key="battleResult2">&nbsp;</div></td>
+                        </tr>
+                        <tr>
+                            <td>艦娘(編成)</td><td>：</td><td><div class="hotKey" data-hot-key="ship1">&nbsp;</div></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>司令部情報</td><td>：</td><td><div class="hotKey" data-hot-key="headquarters">&nbsp;</div></td>
+                        </tr>
+                        <tr>
+                            <td>艦娘(図鑑)</td><td>：</td><td><div class="hotKey" data-hot-key="ship2">&nbsp;</div></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>ランキング</td><td>：</td><td><div class="hotKey" data-hot-key="ranking">&nbsp;</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                ※設定したい撮影メニューの枠内をマウスオーバー後にキーを押すと設定することができます。<br>
+                ※英数字とCtrl、Alt(OSXはOption)、Shift、Command(OSXのみ) の組み合わせが利用可能です。<br>
+                ※設定解除はスペースもしくはDelキーです。<br>
+            </div>
+            <div class="leftMargin bottomMargin">
+                <a href="#" id="save">保　存</a>
+            </div>
+        </form>
+    </body>
+</html>

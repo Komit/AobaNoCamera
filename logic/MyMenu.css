@@ -1,0 +1,82 @@
+#ancMenu {
+	width: 220px;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	background-color: rgba(0,0,0,0.7);
+	color: white;
+	font-size: 14px;
+	font-weight: normal;
+	font-family:sans-serif;
+	text-align: left;
+	z-index: 2147483640;
+	padding: 4px;
+	margin: 0px;
+}
+
+#ancMenu h1 {
+	font-size: 18px;
+	color: white;
+	margin: 0px 0px 5px 0px;
+	border-bottom: white dotted 1px;
+}
+
+#ancMenu h2 {
+	font-size: 16px;
+	color: white;
+	margin: 10px 0px 10px 0px;
+	border-bottom: white solid 1px;
+	border-left: white solid 15px;
+	padding-left: 10px;
+}
+
+#ancMenu .bottomMargin {
+	margin-bottom: 10px;
+}
+
+#ancMenu .leftMargin {
+	margin-left: 25px !important;
+}
+
+#ancMenu a {
+	color: white;
+	text-decoration: underline;
+	padding: 2px 5px !important;
+	margin-right: 2px !important;
+	border: white solid 1px;
+}
+
+#ancMenu a.ancShutterButton, #ancMenu a.ancSaveButton {
+	color: white;
+	background-color: #d5003a;
+	border: white solid 1px;
+}
+
+#ancMenu a.ancFormationButton {
+	font-size: 12px;
+	position: absolute;
+}
+
+#ancMenu a.ancSelected {
+	color: black;
+	background-color: #ffff00;
+	border: black solid 1px;
+}
+
+#ancMenu li {
+	margin-left: 25px !important;
+	margin-bottom: 10px !important;
+}
+
+#ancFormationCanvasArea {
+	position: relative;
+	border: white solid 1px;
+	width: 135px;
+	height: 162px;
+}
+
+#ancFormationCanvas {
+	width: 135px;
+	height: 162px;
+}
