@@ -39,12 +39,22 @@
 	margin-left: 25px !important;
 }
 
+#ancMenu .small {
+	font-size: 0.6em;
+}
+
 #ancMenu a {
 	color: white;
 	text-decoration: underline;
 	padding: 2px 5px !important;
 	margin-right: 2px !important;
 	border: white solid 1px;
+}
+
+#ancMenu a.ancOptiosButton {
+	border-style: none;
+	padding: 0px !important;
+	margin-right: 0px !important;
 }
 
 #ancMenu a.ancShutterButton, #ancMenu a.ancSaveButton {

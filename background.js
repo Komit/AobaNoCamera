@@ -90,6 +90,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         case 'pushHotKey':  // ホットキーエコーバック
             sendHotKey(request.key);
             break;
+        case 'openOption':  // オプション画面表示
+            chrome.tabs.create({ url: chrome.extension.getURL('options.html') });
+            break;
     };
     sendResponse({});
 });

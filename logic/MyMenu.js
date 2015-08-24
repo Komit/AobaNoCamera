@@ -113,6 +113,16 @@ MyMenu.prototype.eventHotKey = function(key) {
     return self;
 };
 
+// 「設定」表示イベント
+MyMenu.prototype.eventOption = function(elm) {
+    var self = this;
+
+    // オプション画面表示
+    chrome.runtime.sendMessage({ mode: 'openOption' }, function(res) {});
+
+    return self;
+};
+
 // 撮影イベント
 MyMenu.prototype.eventCapture = function(elm) {
     var self = this;
