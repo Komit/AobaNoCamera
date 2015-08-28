@@ -16,8 +16,6 @@
     <div class="leftMargin bottomMargin">
         <div class="bottomMargin">
             <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="header" data-capture-mode="standard" data-mask-mode="header">ヘッダー</a>
-        </div>
-        <div class="bottomMargin">
             <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="battleResult1" data-capture-mode="standard" data-mask-mode="battleResult1">戦果報告1</a>
             <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="battleResult2" data-capture-mode="standard" data-mask-mode="battleResult2">戦果報告2</a>
         </div>
@@ -26,37 +24,94 @@
             <a href="#" class="ancShutterButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="new" data-hot-key="ranking" data-capture-mode="standard" data-mask-mode="ranking">ランキング</a>
         </div>
     </div>
-    <h2>編成撮影</h2>
+    <h2>一覧撮影</h2>
     <ol>
         <li>
-            <div class="bottomMargin">編成数・並び方を選択</div>
-            <div id="ancMenuSelectNum" class="bottomMargin">
-                <a href="#" data-event="click:eventSelect" data-type="num" data-num="1">1</a>
-                <a href="#" data-event="click:eventSelect" data-type="num" data-num="2">2</a>
-                <a href="#" data-event="click:eventSelect" data-type="num" data-num="3">3</a>
-                <a href="#" data-event="click:eventSelect" data-type="num" data-num="4">4</a>
-                <a href="#" data-event="click:eventSelect" data-type="num" data-num="5">5</a>
-                <a href="#" data-event="click:eventSelect" data-type="num" data-num="6">6</a>
+            <div class="bottomMargin">撮影モード・枠を選択</div>
+            <div id="ancMenuSelectMode" class="bottomMargin">
+                モード：
+                <a href="#" data-event="click:eventSelect" data-type="mode" data-val="formation">編成</a>
+                <a href="#" data-event="click:eventSelect" data-type="mode" data-val="list">リスト</a>
             </div>
-            <div id="ancMenuSelectColumn" class="bottomMargin">
-                <a href="#" data-event="click:eventSelect" data-type="column" data-num="2">縦2列</a>
-                <a href="#" data-event="click:eventSelect" data-type="column" data-num="3">縦3列</a>
+            <div id="ancMenuSelectWidth" class="bottomMargin">
+                横：
+                <a href="#" data-event="click:eventSelect" data-type="width" data-num="1">1</a>
+                <a href="#" data-event="click:eventSelect" data-type="width" data-num="2">2</a>
+                <a href="#" data-event="click:eventSelect" data-type="width" data-num="3">3</a>
+                <a href="#" data-event="click:eventSelect" data-type="width" data-num="4">4</a>
+                <a href="#" data-event="click:eventSelect" data-type="width" data-num="5">5</a>
+                <a href="#" data-event="click:eventSelect" data-type="width" data-num="6">6</a>
+            </div>
+            <div id="ancMenuSelectHeight" class="bottomMargin">
+                縦：
+                <a href="#" data-event="click:eventSelect" data-type="height" data-num="1">1</a>
+                <a href="#" data-event="click:eventSelect" data-type="height" data-num="2">2</a>
+                <a href="#" data-event="click:eventSelect" data-type="height" data-num="3">3</a>
+                <a href="#" data-event="click:eventSelect" data-type="height" data-num="4">4</a>
+                <a href="#" data-event="click:eventSelect" data-type="height" data-num="5">5</a>
+                <a href="#" data-event="click:eventSelect" data-type="height" data-num="6">6</a>
             </div>
         </li>
         <li>
-            <div>[編成]の[詳細]から撮影</div>
+            <div>↓の撮影位置をクリック</div>
             <div id="ancFormationCanvasArea" class="bottomMargin">
+                <canvas id="ancFormationBackground"></canvas>
                 <canvas id="ancFormationCanvas"></canvas>
-                <a href="#" id="ancShotFormation1" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
-                <a href="#" id="ancShotFormation2" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
-                <a href="#" id="ancShotFormation3" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
-                <a href="#" id="ancShotFormation4" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
-                <a href="#" id="ancShotFormation5" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
-                <a href="#" id="ancShotFormation6" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation">撮</a>
+                <canvas id="ancFormationRule"></canvas>
+                <div id="ancShotFormation1-1" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation1-2" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation1-3" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation1-4" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation1-5" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation1-6" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation2-1" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation2-2" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation2-3" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation2-4" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation2-5" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation2-6" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation3-1" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation3-2" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation3-3" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation3-4" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation3-5" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation3-6" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation4-1" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation4-2" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation4-3" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation4-4" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation4-5" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation4-6" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation5-1" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation5-2" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation5-3" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation5-4" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation5-5" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation5-6" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation6-1" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation6-2" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation6-3" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation6-4" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation6-5" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <div id="ancShotFormation6-6" class="ancShutterButton ancFormationButton" data-event="click:eventCapture,mouseenter:eventShowFrame,mouseleave:eventHideFrame" data-target="ancFormationCanvas" data-capture-mode="formation" data-mask-mode="formation"></div>
+                <canvas id="ancFormationSeparatorVertical0" class="ancFormationSeparator ancFormationSeparatorVertical" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorVertical1" class="ancFormationSeparator ancFormationSeparatorVertical" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorVertical2" class="ancFormationSeparator ancFormationSeparatorVertical" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorVertical3" class="ancFormationSeparator ancFormationSeparatorVertical" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorVertical4" class="ancFormationSeparator ancFormationSeparatorVertical" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorVertical5" class="ancFormationSeparator ancFormationSeparatorVertical" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorVertical6" class="ancFormationSeparator ancFormationSeparatorVertical" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorHorizon0" class="ancFormationSeparator ancFormationSeparatorHorizon" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorHorizon1" class="ancFormationSeparator ancFormationSeparatorHorizon" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorHorizon2" class="ancFormationSeparator ancFormationSeparatorHorizon" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorHorizon3" class="ancFormationSeparator ancFormationSeparatorHorizon" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorHorizon4" class="ancFormationSeparator ancFormationSeparatorHorizon" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorHorizon5" class="ancFormationSeparator ancFormationSeparatorHorizon" data-event="click:eventFormationSeparator"></canvas>
+                <canvas id="ancFormationSeparatorHorizon6" class="ancFormationSeparator ancFormationSeparatorHorizon" data-event="click:eventFormationSeparator"></canvas>
             </div>
         </li>
         <li>
-            <a href="#" class="ancSaveButton" data-event="click:eventSave" data-target="ancFormationCanvas">保存</a>
+            <a href="#" class="ancSaveButton" data-event="click:eventFormationSave">保存</a>
         </li>
     </ol>
 </div>

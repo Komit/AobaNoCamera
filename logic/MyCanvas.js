@@ -27,10 +27,22 @@ MyCanvas.prototype.init = function(width, height) {
 
     self._canvas.width = width * self._ratio;
     self._canvas.height = height * self._ratio;
-    self._ctx.clearRect(0, 0, width * self._ratio, height * self._ratio);
+
+    self._ctx.globalAlpha = 1;
+
+    self.clear();
 
     return self;
 };
+
+MyCanvas.prototype.clear = function(width, height) {
+    var self = this;
+
+    self._ctx.clearRect(0, 0, self._canvas.width, self._canvas.height);
+
+    return self;
+};
+
 
 MyCanvas.prototype.setDisplaySize = function(width, height) {
     var self = this;
@@ -73,6 +85,49 @@ MyCanvas.prototype.copyFromImage = function(image, sx, sy, sw, sh, dx, dy, dw, d
 
     return self;
 };
+
+MyCanvas.prototype.copyFromMyCanvas = function(mc, x, y, w, h) {
+    var self = this;
+
+    var img = mc._ctx.getImageData(
+        x * self._ratio,
+        y * self._ratio,
+        w * self._ratio,
+        h * self._ratio
+    );
+    self._ctx.putImageData(img, 0, 0);
+
+    return self;
+};
+
+MyCanvas.prototype.setLine = function(sx, sy, dx, dy, width, color) {
+    var self = this;
+
+    self._ctx.strokeStyle = color;
+    self._ctx.lineWidth = width * self._ratio;
+    self._ctx.beginPath();
+    self._ctx.moveTo(sx  * self._ratio, sy * self._ratio);
+    self._ctx.lineTo(dx * self._ratio, dy * self._ratio);
+    self._ctx.stroke();
+
+    return self;
+};
+
+MyCanvas.prototype.setPolygon  = function(positions, color) {
+    var self = this;
+
+    self._ctx.fillStyle = color;
+    self._ctx.beginPath();
+    self._ctx.moveTo(positions[0][0] * self._ratio, positions[0][1] * self._ratio);
+    for (var i = 1; i < positions.length; i++) {
+        self._ctx.lineTo(positions[i][0] * self._ratio, positions[i][1] * self._ratio);
+    }
+    self._ctx.closePath();
+    self._ctx.fill();
+
+    return self;
+};
+
 
 MyCanvas.prototype.setMask = function(masks, dx, dy) {
     var self = this;

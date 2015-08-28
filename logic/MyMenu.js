@@ -50,8 +50,9 @@ MyMenu.prototype.start = function() {
     self._frame = new MyFrame();
 
     // 編成選択肢の初期値設定
-    self.eventSelect($('#ancMenuSelectNum a:last').get(0));     // 編成数の最後の要素 → 6
-    self.eventSelect($('#ancMenuSelectColumn a:first').get(0)); // 並び順の最初の要素 → 縦2列
+    self.eventSelect($('#ancMenuSelectMode a').get(0));     // 撮影モード → 編成
+    self.eventSelect($('#ancMenuSelectHeight a').get(2));   // 縦 → 3
+    self.eventSelect($('#ancMenuSelectWidth a').get(1));    // 横 → 2
 
     // オプション設定読み出し
     chrome.storage.sync.get(cnst.setting, function(items) {
@@ -243,6 +244,28 @@ MyMenu.prototype.eventSave = function(elm) {
     return self;
 };
 
+// 一覧保存イベント
+MyMenu.prototype.eventFormationSave = function() {
+    var self = this;
+
+    // 編成用サイズを取得
+    var data = self.calcFormationCanvas();
+
+    // canvasを初期化
+    var canvas = new MyCanvas().init(data.pixelRW, data.pixelRH).setDisplaySize(data.pixelSW, data.pixelSH);
+
+    // 取得画像をコピー
+    canvas.copyFromMyCanvas(new MyCanvas(document.getElementById('ancFormationCanvas')), 0, 0, data.pixelRW, data.pixelRH);
+
+    // セパレータを追加
+    self.setFormationSeparator(canvas, true, false);
+
+    // png保存
+    canvas.toPngFile(new Date().getFormatString(self._setting.defaultFileName) + '.png');
+
+    return self;
+};
+
 // メニュー選択イベント
 MyMenu.prototype.eventSelect = function(elm) {
     var self = this;
@@ -254,10 +277,36 @@ MyMenu.prototype.eventSelect = function(elm) {
     target.addClass('ancSelected');
 
     // 選択値を保存
-    self._selectData[target.data('type')] = parseInt(target.data('num'), 10);
+    if (target.data('num')) {
+        self._selectData[target.data('type')] = parseInt(target.data('num'), 10);
+    } else if (target.data('val')) {
+        self._selectData[target.data('type')] = target.data('val');
+    };
 
     // 編成保存用canvasを初期化
     self.initFormationCanvas();
+
+    return self;
+};
+
+// セパレータ選択イベント
+MyMenu.prototype.eventFormationSeparator = function(elm) {
+    var self = this;
+
+    // 選択値を反転
+    var target = $(elm);
+    var flag = !target.data('selected');
+    target.data('selected', flag);
+
+    // CANVASを再設定
+    if (target.hasClass('ancFormationSeparatorVertical')) {
+        new MyCanvas(elm).init(13, 10).setDisplaySize(13, 10).setPolygon([[6, 0], [12, 9], [0, 9]], (flag) ? 'rgba(255, 255, 0, 1)' : 'rgba(255, 255, 255, 1)');
+    } else if (target.hasClass('ancFormationSeparatorHorizon')) {
+        new MyCanvas(elm).init(10, 13).setDisplaySize(10, 13).setPolygon([[0, 6], [9, 12], [9, 0]], (flag) ? 'rgba(255, 255, 0, 1)' : 'rgba(255, 255, 255, 1)');
+    };
+
+    // セパレータを追加
+    self.setFormationSeparator(new MyCanvas(document.getElementById('ancFormationRule')), false, true);
 
     return self;
 };
@@ -300,20 +349,26 @@ MyMenu.prototype.calcFormationCanvas = function() {
 
     var data = {};
 
-     // 表示数を取得
-    data.num = self._selectData.num;
+     // モードを取得
+    data.mode = self._selectData.mode;
 
-    // 縦・横の表示数を計算
-    data.numH = (data.num <= self._selectData.column) ? 1 : Math.ceil(data.num / self._selectData.column);
-    data.numW = (data.num <= self._selectData.column) ? data.num : self._selectData.column;
+    // 縦・横の表示数を取得
+    data.numH = self._selectData.height;
+    data.numW = self._selectData.width;
 
     // 縦・横の実解像度を計算
-    data.pixelRH = cnst.position.formation.height * data.numH;
-    data.pixelRW = cnst.position.formation.width * data.numW;
+    data.pixelRH = cnst.position[data.mode].height * data.numH;
+    data.pixelRW = cnst.position[data.mode].width * data.numW;
 
-    // 縦・横の表示解像度を計算
-    data.pixelSH = Math.ceil(data.pixelRH * cnst.position.formation.sWidth / data.pixelRW);
-    data.pixelSW = cnst.position.formation.sWidth;
+    // 縦・横の表示解像度を横を基準に計算
+    data.pixelSH = Math.ceil(data.pixelRH * cnst.size.formation.width / data.pixelRW);
+    data.pixelSW = cnst.size.formation.width;
+
+    // 縦の制限値を超えていた場合は縦を基準に再計算
+    if (data.pixelSH > cnst.size.formation.height) {
+        data.pixelSH = cnst.size.formation.height;
+        data.pixelSW = Math.ceil(data.pixelRW * cnst.size.formation.height / data.pixelRH);
+    }
 
     return data;
 };
@@ -327,34 +382,130 @@ MyMenu.prototype.initFormationCanvas = function() {
     var data = self.calcFormationCanvas();
 
     // canvasを初期化
-    var canvas = new MyCanvas(document.getElementById('ancFormationCanvas')).init(data.pixelRW, data.pixelRH).setDisplaySize(data.pixelSW, data.pixelSH);
+    var cnavasBackground = new MyCanvas(document.getElementById('ancFormationBackground')).init(data.pixelSW, data.pixelSH).setDisplaySize(data.pixelSW, data.pixelSH);
+    new MyCanvas(document.getElementById('ancFormationCanvas')).init(data.pixelRW, data.pixelRH).setDisplaySize(data.pixelSW, data.pixelSH);
+    new MyCanvas(document.getElementById('ancFormationRule')).init(data.pixelSW, data.pixelSH).setDisplaySize(data.pixelSW, data.pixelSH);
 
-    // シャッター表示領域を設定
-    $('#ancFormationCanvasArea').css({ height: data.pixelSH, width: data.pixelSW });
+    // 背景枠を作成
+    for (var w = 0; w <= data.numW; w++) {
+        var x = Math.ceil(w * data.pixelSW / data.numW);
+        cnavasBackground.setLine(x, 0, x, data.pixelSH, (w === 0 || w === data.numW) ? 1 : 0.5, 'rgba(255, 255, 255, 1)');
+    };
+    for (var h = 0; h <= data.numH; h++) {
+        var y = Math.ceil(h * data.pixelSH / data.numH);
+        cnavasBackground.setLine(0, y, data.pixelSW, y, (h === 0 || h === data.numH) ? 1 : 0.5, 'rgba(255, 255, 255, 1)');
+    };
+
+    // 表示領域を設定
+    $('#ancFormationCanvasArea').css({ height: data.pixelSH + 15, width: data.pixelSW + 15 });
 
     // シャッターを一旦全非表示
-    $('#ancFormationCanvasArea a').hide();
+    $('#ancFormationCanvasArea .ancFormationButton').hide();
 
     // シャッターを設定
-    for (var i = 1; i <= data.num; i++){
-        var target = $('#ancShotFormation' + i.toString());
+    for (var w = 1; w <= data.numW; w++) {
+        for (var h = 1; h <= data.numH; h++){
+            var target = $('#ancShotFormation' + w.toString() + '-' + h.toString());
 
-        // 位置を計算
-        var y = Math.ceil(i / data.numW);
-        var x = (i % data.numW === 0) ? data.numW : i % data.numW;
+            // 位置データ等をdataに埋め込む
+            target.data('left', (w-1) * cnst.position[data.mode].width);
+            target.data('top', (h-1) * cnst.position[data.mode].height);
+            target.data('captureMode', data.mode);
+            target.data('maskMode', data.mode);
+
+            // 座標を計算
+            var top = Math.ceil((h - 1) * data.pixelSH / data.numH);
+            var left = Math.ceil((w - 1) * data.pixelSW / data.numW);
+
+            // サイズを計算
+            var height = Math.ceil(data.pixelSH / data.numH);
+            var width = Math.ceil(data.pixelSW / data.numW);
+
+            // 表示
+            target.css({ top: top, left: left, height: height, width: width }).show();
+        };
+    };
+
+    // セパレータを一旦初期化
+    $('#ancFormationCanvasArea .ancFormationSeparator').hide().data('active', false).data('selected', false);
+
+    // セパレータを設定
+    for (var w = 0; w <= data.numW; w++) {
+        var id = 'ancFormationSeparatorVertical' + w.toString();
+
+        // CANVAS再設定
+        new MyCanvas(document.getElementById(id)).init(13, 10).setDisplaySize(13, 10).setPolygon([[6, 0], [12, 9], [0, 9]], 'rgba(255, 255, 255, 1)');
+
+        var target = $('#' + id);
 
         // 位置データ等をdataに埋め込む
-        target.data('left', (x-1) * cnst.position.formation.width);
-        target.data('top', (y-1) * cnst.position.formation.height);
-
-        // 座標を計算
-        var top = Math.ceil((y - 1) * data.pixelSH / data.numH + (data.pixelSH / data.numH - target.outerHeight(true)) / 2);
-        var left = Math.ceil((x - 1) * data.pixelSW / data.numW + (data.pixelSW / data.numW - target.outerWidth(true)) / 2);
+        var rx = Math.ceil(w * data.pixelRW / data.numW);
+        var sx = Math.ceil(w * data.pixelSW / data.numW);
+        target.data('rx', rx);
+        target.data('sx', sx);
+        target.data('active', true);
+        target.data('edge', (w === 0 || w === data.numW) ? true : false);
 
         // 表示
-        target.css({ top: top, left: left }).show();
-    };
+        target.css({ top: data.pixelSH + 1, left: sx - 6 }).show();
+   };
+   for (var h = 0; h <= data.numH; h++) {
+        var id = 'ancFormationSeparatorHorizon' + h.toString();
+
+        // CANVAS再設定
+        new MyCanvas(document.getElementById(id)).init(10, 13).setDisplaySize(10, 13).setPolygon([[0, 6], [9, 12], [9, 0]], 'rgba(255, 255, 255, 1)');
+
+        var target = $('#' + id);
+
+        // 位置データ等をdataに埋め込む
+        var ry = Math.ceil(h * data.pixelRH / data.numH);
+        var sy = Math.ceil(h * data.pixelSH / data.numH);
+        target.data('ry', ry);
+        target.data('sy', sy);
+        target.data('active', true);
+        target.data('edge', (h === 0 || h === data.numH) ? true : false);
+
+        // 表示
+        target.css({ top: sy - 6, left: data.pixelSW + 1 }).show();
+   };
 
     return self;
 };
 
+// セパレータを設定
+MyMenu.prototype.setFormationSeparator = function(canvas, real, clear) {
+    var self = this;
+
+    // 編成用サイズを取得
+    var data = self.calcFormationCanvas();
+
+    // クリアモードの場合はcanvasはクリア
+    if (clear) canvas.clear();
+
+    // セパレータのcanvasを設定
+    $('canvas.ancFormationSeparatorVertical').each(function() {
+        var target = $(this);
+        var width = (target.data('edge') === true) ? 1 : 0.5;
+        if (target.data('selected')) {
+            if (real) {
+                canvas.setLine(target.data('rx'), 0, target.data('rx'), data.pixelRH, width, 'rgba(0, 0, 0, 1)');
+            } else {
+                canvas.setLine(target.data('sx'), 0, target.data('sx'), data.pixelSH, width * 2, 'rgba(0, 0, 0, 1)');
+            };
+        };
+    });
+
+    $('canvas.ancFormationSeparatorHorizon').each(function() {
+        var target = $(this);
+        var width = (target.data('edge') === true) ? 1 : 0.5;
+        if (target.data('selected')) {
+            if (real) {
+                canvas.setLine(0, target.data('ry'), data.pixelRW, target.data('ry'), width, 'rgba(0, 0, 0, 1)');
+            } else {
+                canvas.setLine(0, target.data('sy'), data.pixelSW, target.data('sy'), width * 2, 'rgba(0, 0, 0, 1)');
+            };
+        };
+    });
+
+    return self;
+};

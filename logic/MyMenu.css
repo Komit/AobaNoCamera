@@ -1,92 +1,124 @@
 #ancMenu {
-	width: 220px;
-	height: 100%;
-	top: 0px;
-	left: 0px;
-	position: fixed;
-	background-color: rgba(0,0,0,0.7);
-	color: white;
-	font-size: 14px;
-	font-weight: normal;
-	font-family:sans-serif;
-	text-align: left;
-	z-index: 2147483640;
-	padding: 4px;
-	margin: 0px;
+    width: 220px;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    font-size: 12px;
+    font-weight: normal;
+    font-family:sans-serif;
+    text-align: left;
+    z-index: 2147483600;
+    padding: 4px;
+    margin: 0px;
 }
 
 #ancMenu h1 {
-	font-size: 18px;
-	color: white;
-	margin: 0px 0px 5px 0px;
-	border-bottom: white dotted 1px;
+    font-size: 16px;
+    color: white;
+    margin: 0px 0px 5px 0px;
+    border-bottom: white dotted 1px;
 }
 
 #ancMenu h2 {
-	font-size: 16px;
-	color: white;
-	margin: 10px 0px 10px 0px;
-	border-bottom: white solid 1px;
-	border-left: white solid 15px;
-	padding-left: 10px;
+    font-size: 14px;
+    color: white;
+    margin: 10px 0px 10px 0px;
+    border-bottom: white solid 1px;
+    border-left: white solid 15px;
+    padding-left: 10px;
 }
 
 #ancMenu .bottomMargin {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 #ancMenu .leftMargin {
-	margin-left: 25px !important;
+    margin-left: 15px !important;
 }
 
 #ancMenu .small {
-	font-size: 0.6em;
+    font-size: 0.6em;
 }
 
 #ancMenu a {
-	color: white;
-	text-decoration: underline;
-	padding: 2px 5px !important;
-	margin-right: 2px !important;
-	border: white solid 1px;
+    color: white;
+    text-decoration: underline;
+    padding: 2px 3px !important;
+    margin-right: 1px !important;
+    border: white solid 1px;
 }
 
 #ancMenu a.ancOptiosButton {
-	border-style: none;
-	padding: 0px !important;
-	margin-right: 0px !important;
+    border-style: none;
+    padding: 0px !important;
+    margin-right: 0px !important;
 }
 
 #ancMenu a.ancShutterButton, #ancMenu a.ancSaveButton {
-	color: white;
-	background-color: #d5003a;
-	border: white solid 1px;
-}
-
-#ancMenu a.ancFormationButton {
-	font-size: 12px;
-	position: absolute;
+    color: white;
+    background-color: #d5003a;
+    border: white solid 1px;
 }
 
 #ancMenu a.ancSelected {
-	color: black;
-	background-color: #ffff00;
-	border: black solid 1px;
+    color: black;
+    background-color: #ffff00;
+    border: black solid 1px;
 }
 
 #ancMenu li {
-	margin-left: 25px !important;
-	margin-bottom: 10px !important;
+    margin-left: 25px !important;
+    margin-bottom: 10px !important;
 }
 
 #ancFormationCanvasArea {
-	position: relative;
-	border: white solid 1px;
-	width: 135px;
-	height: 162px;
+    position: relative;
+    width: 135px;
+    height: 162px;
+    margin-top: 6px;
+}
+
+#ancFormationBackground {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2147483600;
 }
 
 #ancFormationCanvas {
-	width: 135px;
-	height: 162px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2147483601;
+}
+
+#ancFormationRule {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2147483602;
+}
+
+#ancMenu div.ancFormationButton {
+    position: absolute;
+    box-sizing: border-box;
+    cursor: pointer;
+    z-index: 2147483610;
+    display: none;
+}
+
+#ancMenu div.ancFormationButton:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+    position: absolute;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#ancMenu canvas.ancFormationSeparator {
+    position: absolute;
+    cursor: pointer;
+    display: none;
 }

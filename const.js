@@ -5,6 +5,12 @@ var cnst = {
         shutterFrame: 'on',
         hotKey: '{}',
     },
+    size: {
+        formation: {
+            width: 160,
+            height: 200,
+        },
+    },
     position: {
         standard: {
             left:   0,
@@ -17,7 +23,12 @@ var cnst = {
             top:    100,
             width:  465,
             height: 365,
-            sWidth: 160,
+        },
+        list: {
+            left:   360,
+            top:    98,
+            width:  440,
+            height: 364,
         },
         material: {
             left:   656,
@@ -53,6 +64,11 @@ var cnst = {
         formation:      [
                             { mode: 'copy', sx: 0, sy:7, x: 0, y: 0, w: 7, h: 7, hidden: true },
                             { mode: 'copy', sx: 0, sy:349, x: 0, y: 358, w: 7, h: 7, hidden: true },
+                        ],
+        list:           [
+                            { mode: 'copy', sx: 0, sy:8, x: 0, y: 0, w: 8, h: 8, hidden: true },
+                            { mode: 'copy', sx: 0, sy:348, x: 0, y: 356, w: 8, h: 8, hidden: true },
+                            { mode: 'copy', sx: 40, sy:0, x: 0, y: 0, w: 8, h: 2, hidden: true },
                         ],
         material:       [
                             { mode: 'copy', sx: 6, sy:0, x: 0, y: 0, w: 6, h: 18, hidden: true },

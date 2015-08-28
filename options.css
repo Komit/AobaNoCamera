@@ -1,11 +1,15 @@
 body {
 	background-color: rgba(0,0,0,0.7);
 	color: white;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: normal;
 	font-family:sans-serif;
 	padding: 10px;
 	margin: 0px;
+}
+
+table {
+	font-size: 12px;
 }
 
 h1 {
@@ -27,7 +31,7 @@ h2 {
 }
 
 .bottomMargin {
-	margin-bottom: 25px;
+	margin-bottom: 20px;
 }
 
 .leftMargin {
@@ -39,7 +43,7 @@ a {
 	background-color: #d5003a;
 	color: white;
 	text-decoration: underline;
-	padding: 5px 10px;
+	padding: 3px 6px;
 	border: white solid 1px;
 }
 
