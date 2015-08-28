@@ -6,7 +6,7 @@ Chromeの機能のみで実装されていますので、OSXでも利用可能�
 
 
 #### YouTube
-[<img src="http://img.youtube.com/vi/pfFuOBjqqKM/0.jpg" alt="「青葉のカメラ」の使い方" title="「青葉のカメラ」の使い方" width="480px" height="300px"/>](https://www.youtube.com/watch?v=pfFuOBjqqKM)
+[<img src="http://img.youtube.com/vi/pfFuOBjqqKM/0.jpg" alt="「青葉のカメラ」の使い方" title="「青葉のカメラ」の使い方" width="480px" />](https://www.youtube.com/watch?v=pfFuOBjqqKM)
 
 ## インストール
 [Chromeウェブストア](https://chrome.google.com/webstore/detail/%E9%9D%92%E8%91%89%E3%81%AE%E3%82%AB%E3%83%A1%E3%83%A9/epellgielojfhbjhdnplcnmndnifbien)からインストールしてください。
