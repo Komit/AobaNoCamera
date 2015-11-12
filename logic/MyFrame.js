@@ -17,7 +17,7 @@ MyFrame.prototype.init = function() {
     self._div.style.left      = '-1px';
     self._div.style.position  = 'absolute';
     self._div.style.border    = 'red solid 5px';
-    self._div.style.zIndex    = '2147483630';
+    self._div.style.zIndex    = '2000000000';
     self._div.style.padding   = '0px';
     self._div.style.margin    = '0px';
     self._div.style.display   = 'none';
@@ -63,7 +63,7 @@ MyFrame.prototype.setMask = function(masks) {
             };
 
             var canvas = new MyCanvas().init(data.w, data.h).setMask([data]).getCanvas();
-            canvas.style.zIndex     = 2147483631;
+            canvas.style.zIndex     = 2000000001;
             canvas.style.position   = 'absolute';
             canvas.style.left       = masks[i].x.toString() + 'px';
             canvas.style.top        = masks[i].y.toString() + 'px';

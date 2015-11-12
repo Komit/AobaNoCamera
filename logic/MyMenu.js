@@ -131,8 +131,11 @@ MyMenu.prototype.eventCapture = function(elm) {
     // 表示中？
     var displaying = (self._showFlag === true) ? true : false;
 
-    // 表示中ならメニューを隠す
-    if (displaying) self.show(false);
+    // 表示中ならフレームとメニューを隠す
+    if (displaying) {
+        self._frame.show(false);
+        self.show(false);
+    };
 
     // 強制redraw
     self.redraw(function() {
