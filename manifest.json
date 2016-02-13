@@ -1,6 +1,6 @@
 {
 	"name": "青葉のカメラ",
-	"version": "0.5.1",
+	"version": "0.5.2",
 	"manifest_version": 2,
 	"content_security_policy": "script-src 'self'; object-src 'self'",
 	"description": "艦隊これくしょん～艦これ～ でプレイ画面のスクリーンショットを取得",

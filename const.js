@@ -59,7 +59,7 @@ var cnst = {
     },
     mask: {
         header:         [
-                            { mode: 'draw', color: '#252525', x: 113, y: 7, w: 150, h: 16 },
+                            { mode: 'draw', color: '#252525', x: 113, y: 7, w: 168, h: 16 },
                         ],
         formation:      [
                             { mode: 'copy', sx: 0, sy:7, x: 0, y: 0, w: 7, h: 7, hidden: true },
@@ -74,11 +74,11 @@ var cnst = {
                             { mode: 'copy', sx: 6, sy:0, x: 0, y: 0, w: 6, h: 18, hidden: true },
                         ],
         headquarters:   [
-                            { mode: 'draw', color: '#252525', x: 113, y: 8, w: 150, h: 16 },
+                            { mode: 'draw', color: '#252525', x: 113, y: 8, w: 168, h: 16 },
                             { mode: 'copy', sx: 202, sy:103, x: 202, y: 125, w: 250, h: 21 },
                         ],
         ranking:        [
-                            { mode: 'draw', color: '#252525', x: 113, y: 8, w: 150, h: 16 },
+                            { mode: 'draw', color: '#252525', x: 113, y: 8, w: 168, h: 16 },
                             { mode: 'draw', color: '#383838', x: 228, y: 157, w: 145, h: 19 },
                             { mode: 'draw', color: '#383838', x: 228, y: 187, w: 145, h: 19 },
                             { mode: 'draw', color: '#383838', x: 228, y: 217, w: 145, h: 19 },
@@ -91,10 +91,10 @@ var cnst = {
                             { mode: 'draw', color: '#383838', x: 228, y: 427, w: 145, h: 19 },
                         ],
         battleResult1:  [
-                            { mode: 'draw', color: '#252c30', x: 92, y: 85, w: 150, h: 17 },
+                            { mode: 'draw', color: '#252c30', x: 92, y: 85, w: 168, h: 17 },
                         ],
         battleResult2:  [
-                            { mode: 'draw', color: '#252c30', x: 60, y: 85, w: 150, h: 17 },
+                            { mode: 'draw', color: '#252c30', x: 60, y: 85, w: 168, h: 17 },
                         ],
     },
 };
