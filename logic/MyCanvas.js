@@ -168,7 +168,7 @@ MyCanvas.prototype.setMask = function(masks, dx, dy) {
 MyCanvas.prototype.toPngFile = function(fileName) {
     var self = this;
 
-    self._canvas.toBlobHD(function(blob) { saveAs(blob, fileName); }, 'image/png');
+    self._canvas.toBlob(function(blob) { saveAs(blob, fileName); }, 'image/png');
 
     /*
     var elm = document.createElement('a');

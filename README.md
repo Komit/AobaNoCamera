@@ -23,6 +23,6 @@ Chromeの機能のみで実装されていますので、OSXでも利用可能�
 
 以下のライブラリ・素材については各オリジナルのライセンス・ガイドラインに従います。
 - [jQuery](http://jquery.com/) ([ライセンス](https://jquery.org/license/))
-- [FileSaver.js](http://jquery.com/) ([ライセンス](https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md))
-- [canvas-toBlob.js](http://jquery.com/) ([ライセンス](https://github.com/eligrey/canvas-toBlob.js/blob/master/LICENSE.md))
+- [FileSaver.js](https://github.com/eligrey/FileSaver.js) ([ライセンス](https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md))
+- [JavaScript Canvas to Blob](https://github.com/blueimp/JavaScript-Canvas-to-Blob) ([ライセンス](https://github.com/blueimp/JavaScript-Canvas-to-Blob))
 - シャッター音 [サウンドオフィスドットコム](http://www.soundoffice.com/se/item/se-033.php) ([ガイドライン](http://www.soundoffice.com/se/guideline.php))
