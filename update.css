@@ -1,0 +1,42 @@
+body {
+	background-color: rgba(0,0,0,0.7);
+	color: white;
+	font-size: 1em;
+	font-weight: normal;
+	font-family:sans-serif;
+}
+
+table {
+	font-size: 12px;
+}
+
+h1 {
+	font-size: 2em;
+	color: white;
+	margin: 0px 0px 30px 0px;
+	border-bottom: white dotted 3px;
+	width: 98%;
+}
+
+h2 {
+	font-size: 1.5em;
+	color: white;
+	margin: 10px 0px 10px 0px;
+	border-bottom: white solid 1px;
+	border-left: white solid 15px;
+	padding-left: 10px;
+	width: 98%;
+}
+
+.bottomMargin {
+	margin-bottom: 20px;
+}
+
+.leftMargin {
+	margin-left: 25px;
+}
+
+strong {
+	color: #ffaaaa;
+	text-decoration: underline;
+}

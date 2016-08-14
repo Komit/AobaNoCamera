@@ -30,6 +30,12 @@ var cnst = {
             width:  440,
             height: 364,
         },
+		airservice: {
+            left:   580,
+            top:    133,
+            width:  214,
+            height: 326,
+        },
         material: {
             left:   656,
             top:    10,
@@ -69,6 +75,10 @@ var cnst = {
                             { mode: 'copy', sx: 0, sy:8, x: 0, y: 0, w: 8, h: 8, hidden: true },
                             { mode: 'copy', sx: 0, sy:348, x: 0, y: 356, w: 8, h: 8, hidden: true },
                             { mode: 'copy', sx: 40, sy:0, x: 0, y: 0, w: 8, h: 2, hidden: true },
+                        ],
+        airservice:     [
+                            { mode: 'copy', sx: 10, sy:0, x: 0, y: 0, w: 10, h: 6, hidden: true },
+                            { mode: 'copy', sx: 10, sy:0, x: 210, y: 0, w: 5, h: 6, hidden: true },
                         ],
         material:       [
                             { mode: 'copy', sx: 6, sy:0, x: 0, y: 0, w: 6, h: 18, hidden: true },

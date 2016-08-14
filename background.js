@@ -1,3 +1,8 @@
+// インストール時orアップデート時
+chrome.runtime.onInstalled.addListener(function() {
+    chrome.tabs.create({ url: chrome.extension.getURL('update.html') });
+});
+
 // スナップショット取得
 var capturScreen = function(param) {
     chrome.tabs.getCurrent(function(tab) {
