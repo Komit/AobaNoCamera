@@ -1,6 +1,11 @@
 // インストール時orアップデート時
 chrome.runtime.onInstalled.addListener(function() {
-    chrome.tabs.create({ url: chrome.extension.getURL('update.html') });
+	// 拡張自体のインストール/アップデートの場合にお知らせを表示
+	var manifest = chrome.runtime.getManifest();
+    chrome.storage.local.get({ version: '0.0.0' }, function(items) {
+    	if (items.version !== manifest.version) chrome.tabs.create({ url: chrome.extension.getURL('update.html') });
+		chrome.storage.local.set({ version: manifest.version });
+    });
 });
 
 // スナップショット取得
