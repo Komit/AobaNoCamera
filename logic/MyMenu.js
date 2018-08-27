@@ -336,9 +336,9 @@ MyMenu.prototype.getGamePosition = function() {
     if (target.length === 1) {
         var offset = target.offset();
         data.top        = Math.round(offset.top + 16) - $(window).scrollTop();
-        data.left       = Math.round(offset.left + (target.width() - 800) / 2) - $(window).scrollLeft();
-        data.height     = 480;
-        data.width      = 800;
+        data.left       = Math.round(offset.left + (target.width() - 1200) / 2) - $(window).scrollLeft();
+        data.height     = 720;
+        data.width      = 1200;
         data.success    = true;
     };
 
