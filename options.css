@@ -62,3 +62,8 @@ input[type=text] {
 	color: black;
 	border: black solid 1px;
 }
+
+strong {
+	color: #ffaaaa;
+	text-decoration: underline;
+}

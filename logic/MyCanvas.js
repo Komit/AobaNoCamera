@@ -17,7 +17,8 @@ MyCanvas.prototype.getCanvas = function() {
 MyCanvas.prototype.getRatio = function() {
     var self = this;
 
-    return (window.devicePixelRatio || 1) / (self._ctx.backingStorePixelRatio || 1);
+    return 1;
+    //return (window.devicePixelRatio || 1) / (self._ctx.backingStorePixelRatio || 1);
 };
 
 MyCanvas.prototype.init = function(width, height) {

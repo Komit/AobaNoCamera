@@ -1,29 +1,29 @@
 // インストール時orアップデート時
 chrome.runtime.onInstalled.addListener(function() {
-	// 拡張自体のインストール/アップデートの場合にお知らせを表示
-	var manifest = chrome.runtime.getManifest();
+    // 拡張自体のインストール/アップデートの場合にお知らせを表示
+    var manifest = chrome.runtime.getManifest();
     chrome.storage.local.get({ version: '0.0.0' }, function(items) {
-    	if (items.version !== manifest.version) chrome.tabs.create({ url: chrome.extension.getURL('update.html') });
-		chrome.storage.local.set({ version: manifest.version });
+        if (items.version !== manifest.version) chrome.tabs.create({ url: chrome.extension.getURL('update.html') });
+        chrome.storage.local.set({ version: manifest.version });
     });
 });
 
+// タブに送信
+var sendMessageTab = function(param) {
+    chrome.tabs.query({ active: true, windowId: chrome.windows.WINDOW_ID_CURRENT }, function(tab) {
+        for (var i = 0; i < tab.length; i++) {
+            chrome.tabs.sendMessage(tab[i].id, param, function() {});
+        };
+    });
+};
+
+
 // スナップショット取得
 var capturScreen = function(param) {
-    chrome.tabs.getCurrent(function(tab) {
-        // キャプチャー取得
-        chrome.tabs.captureVisibleTab({ format: 'png' }, function(dataUrl){
-            // キャプチャー完了メッセージを送信
-            param.dataUrl = dataUrl;
-            param.mode = 'completeCapture';
-
-            chrome.tabs.query({ active: true, windowId: chrome.windows.WINDOW_ID_CURRENT }, function(tab) {
-                for (var i = 0; i < tab.length; i++) {
-                    chrome.tabs.sendMessage(tab[i].id, param, function() {});
-                };
-            });
-        });
-    });
+//    chrome.tabs.getCurrent(function(tab) {
+        param.mode = 'getCanvasCapture';
+        sendMessageTab(param);
+//    });
 };
 
 // ホットキー送信
@@ -31,17 +31,13 @@ var hotKeyWait = false;
 var sendHotKey = function(key) {
     if (hotKeyWait !== true) {
 
-        // 0.2秒相当のwaitをかける
+        // 0.1秒相当のwaitをかける
         hotKeyWait = true;
         window.setTimeout(function() {
             hotKeyWait = false;
-        }, 200);
+        }, 100);
 
-        chrome.tabs.query({ active: true, windowId: chrome.windows.WINDOW_ID_CURRENT }, function(tab) {
-            for (var i = 0; i < tab.length; i++) {
-                chrome.tabs.sendMessage(tab[i].id, { mode: 'receiveHotKey', key: key }, function() {});
-            };
-        });
+        sendMessageTab({ mode: 'receiveHotKey', key: key });
     };
 };
 
@@ -49,11 +45,11 @@ var sendHotKey = function(key) {
 var toggleButton = function(tabId, flag) {
     if (flag === true) {
         chrome.browserAction.enable(tabId)
-        chrome.browserAction.setTitle({ tabId: tabId, title: '青葉のカメラ[取得可能]' });
+        chrome.browserAction.setTitle({ tabId: tabId, title: '青葉のカメラ' });
         chrome.browserAction.setIcon({ tabId: tabId, path: 'icon/icon38_enabled.png' });
     } else {
         chrome.browserAction.disable(tabId)
-        chrome.browserAction.setTitle({ tabId: tabId, title: '青葉のカメラ[取得不可]' });
+        chrome.browserAction.setTitle({ tabId: tabId, title: '青葉のカメラ' });
         chrome.browserAction.setIcon({ tabId: tabId, path: 'icon/icon38_disabled.png' });
     };
 }
@@ -61,8 +57,8 @@ var toggleButton = function(tabId, flag) {
 // タブのステータス変更イベント処理
 var chageTabStatus = function(tabId) {
     chrome.tabs.get(tabId, function(tab) {
-        toggleButton(tabId, (tab.status === 'complete' && tab.url.indexOf('www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/') >= 0) ? true : false);
-        //toggleButton(tabId, true);
+        //toggleButton(tabId, (tab.status === 'complete' && tab.url.indexOf('www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/') >= 0) ? true : false);
+        toggleButton(tabId, true);
     });
 };
 
@@ -76,6 +72,7 @@ chrome.tabs.onUpdated.addListener(function(tabId) {
 chrome.tabs.onActivated.addListener(function(activeInfo) {
     chageTabStatus(activeInfo.tabId);
 });
+
 chrome.tabs.onZoomChange.addListener(function(zoomChangeInfo){
   chrome.tabs.sendMessage(zoomChangeInfo.tabId, { mode: 'changeZoom' }, function(res){});
 });
@@ -84,7 +81,10 @@ chrome.tabs.onZoomChange.addListener(function(zoomChangeInfo){
 chrome.browserAction.onClicked.addListener(function(tab) {
     // ボタンが有効な場合に実行
     chrome.browserAction.getTitle({ tabId: tab.id }, function(result) {
-        if (result.indexOf('取得可能') === -1) return;
+        if (tab.url.indexOf('www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/') < 0) {
+            alert("艦これのゲーム画面以外では動作しません。")
+            return;
+        }
 
         // メニューの表示非表示を切り替え
         chrome.tabs.sendMessage(tab.id, { mode: 'toggleMenu' }, function(res){});
@@ -102,6 +102,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             break;
         case 'openOption':  // オプション画面表示
             chrome.tabs.create({ url: chrome.extension.getURL('options.html') });
+            break;
+        case 'completeCanvasCapture':  // 撮影完了
+            request.mode = 'completeCapture';
+            sendMessageTab(request);
             break;
     };
     sendResponse({});

@@ -178,7 +178,7 @@ MyMenu.prototype.completeCupter = function(msg) {
     // dataUrlをcanvasに貼り付ける
     var y = (data.top === undefined) ? 0 : data.top;
     var x = (data.left === undefined) ? 0 : data.left;
-    canvas.copyFromDataUrl(msg.dataUrl, pos.left + frame.left, pos.top + frame.top, frame.width, frame.height, x, y, frame.width, frame.height, function(c) {
+    canvas.copyFromDataUrl(msg.dataUrl, frame.left, frame.top, frame.width, frame.height, x, y, frame.width, frame.height, function(c) {
         // マスキング設定がある場合はマスキング実施
         if (mask !== null) canvas.setMask(mask, x, y);
 

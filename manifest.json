@@ -1,6 +1,6 @@
 {
 	"name": "青葉のカメラ",
-	"version": "0.7.1",
+	"version": "0.8.0",
 	"manifest_version": 2,
 	"content_security_policy": "script-src 'self'; object-src 'self'",
 	"description": "艦隊これくしょん～艦これ～ でプレイ画面のスクリーンショットを取得",
@@ -22,7 +22,8 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/"
+				"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/",
+				"http://osapi.dmm.com/gadgets/*"
 			],
 			"js": [
 				"lib/canvas-to-blob.js",
@@ -50,7 +51,17 @@
 			],
 			"js": [
 				"logic/MyKey.js",
-				"intercept.js"
+				"intercept_keys.js"
+			],
+			"run_at" : "document_end",
+			"all_frames" : true
+		},
+		{
+			"matches": [
+				"http://*/kcs2/index.php*"
+			],
+			"js": [
+				"intercept_canvas.js"
 			],
 			"run_at" : "document_end",
 			"all_frames" : true
