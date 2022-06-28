@@ -1,8 +1,7 @@
 {
 	"name": "青葉のカメラ",
-	"version": "0.8.0",
-	"manifest_version": 2,
-	"content_security_policy": "script-src 'self'; object-src 'self'",
+	"version": "0.9.0",
+	"manifest_version": 3,
 	"description": "艦隊これくしょん～艦これ～ でプレイ画面のスクリーンショットを取得",
 	"icons": {
 		"128": "icon/icon128.png",
@@ -10,14 +9,14 @@
 		"16":  "icon/icon16.png"
 	},
 	"options_page": "options.html",
-	"browser_action": {
+	"action": {
 		"default_title": "青葉のカメラ[取得不可]",
 		"default_icon":  {
 			"38":  "icon/icon38_disabled.png"
 		}
 	},
 	"background": {
-		"scripts": ["background.js"]
+		"service_worker": "background.js"
 	},
 	"content_scripts": [
 		{
@@ -67,8 +66,11 @@
 			"all_frames" : true
 		}
 	],
-	"web_accessible_resources": [
-		"logic/MyMenu.html"
+	"web_accessible_resources": [{
+		"resources": ["logic/MyMenu.html"],
+		"matches": ["<all_urls>"]
+	  }
 	],
-	"permissions": ["background", "management", "tabs", "storage", "<all_urls>"]
+	"permissions": ["background", "management", "tabs", "storage"],
+	"host_permissions": ["<all_urls>"]
 }

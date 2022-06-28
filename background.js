@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener(function() {
     // 拡張自体のインストール/アップデートの場合にお知らせを表示
     var manifest = chrome.runtime.getManifest();
     chrome.storage.local.get({ version: '0.0.0' }, function(items) {
-        if (items.version !== manifest.version) chrome.tabs.create({ url: chrome.extension.getURL('update.html') });
+        if (items.version !== manifest.version) chrome.tabs.create({ url: chrome.runtime.getURL('update.html') });
         chrome.storage.local.set({ version: manifest.version });
     });
 });
@@ -44,13 +44,13 @@ var sendHotKey = function(key) {
 // ボタンの有効無効切り替え
 var toggleButton = function(tabId, flag) {
     if (flag === true) {
-        chrome.browserAction.enable(tabId)
-        chrome.browserAction.setTitle({ tabId: tabId, title: '青葉のカメラ' });
-        chrome.browserAction.setIcon({ tabId: tabId, path: 'icon/icon38_enabled.png' });
+        chrome.action.enable(tabId)
+        chrome.action.setTitle({ tabId: tabId, title: '青葉のカメラ' });
+        chrome.action.setIcon({ tabId: tabId, path: 'icon/icon38_enabled.png' });
     } else {
-        chrome.browserAction.disable(tabId)
-        chrome.browserAction.setTitle({ tabId: tabId, title: '青葉のカメラ' });
-        chrome.browserAction.setIcon({ tabId: tabId, path: 'icon/icon38_disabled.png' });
+        chrome.action.disable(tabId)
+        chrome.action.setTitle({ tabId: tabId, title: '青葉のカメラ' });
+        chrome.action.setIcon({ tabId: tabId, path: 'icon/icon38_disabled.png' });
     };
 }
 
@@ -78,14 +78,13 @@ chrome.tabs.onZoomChange.addListener(function(zoomChangeInfo){
 });
 
 // アイコンが押された場合
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.action.onClicked.addListener(function(tab) {
     // ボタンが有効な場合に実行
-    chrome.browserAction.getTitle({ tabId: tab.id }, function(result) {
-        if (tab.url.indexOf('www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/') < 0) {
-            alert("艦これのゲーム画面以外では動作しません。")
+    chrome.action.getTitle({ tabId: tab.id }, function(result) {
+        if (tab.url.indexOf('www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/') < 0) {        
+            //alert("艦これのゲーム画面以外では動作しません。")
             return;
         }
-
         // メニューの表示非表示を切り替え
         chrome.tabs.sendMessage(tab.id, { mode: 'toggleMenu' }, function(res){});
     });
@@ -101,7 +100,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             sendHotKey(request.key);
             break;
         case 'openOption':  // オプション画面表示
-            chrome.tabs.create({ url: chrome.extension.getURL('options.html') });
+            chrome.tabs.create({ url: chrome.runtime.getURL('options.html') });
             break;
         case 'completeCanvasCapture':  // 撮影完了
             request.mode = 'completeCapture';
